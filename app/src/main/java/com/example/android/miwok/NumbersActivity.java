@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class NumbersActivity extends AppCompatActivity {
         words.addAll(Arrays.asList("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"));
 
         ArrayAdapter<String> wordsArray = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,words);
-        GridView listView=(GridView) findViewById(R.id.list);
+        Spinner listView=(Spinner) findViewById(R.id.list);
         listView.setAdapter(wordsArray);
 
     }
