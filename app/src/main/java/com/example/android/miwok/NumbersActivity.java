@@ -39,7 +39,7 @@ public class NumbersActivity extends AppCompatActivity {
         words.addAll(Arrays.asList("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"));
 
         ArrayAdapter<String> wordsArray = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,words);
-        Spinner listView=(Spinner) findViewById(R.id.list);
+        ListView listView=(ListView) findViewById(R.id.list);
         listView.setAdapter(wordsArray);
 
     }
