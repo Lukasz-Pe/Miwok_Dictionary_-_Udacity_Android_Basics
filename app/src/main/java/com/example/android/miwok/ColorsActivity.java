@@ -28,16 +28,15 @@ public class ColorsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
-        ArrayList<Word> words = new ArrayList<>(Arrays.asList(new Word("red", "czerwony"),
-                new Word("green", "zielony"),
-                new Word("blue", "niebieski"),
-                new Word("yellow", "żółty"),
-                new Word("black", "czarny"),
-                new Word("cyan", "cyjan"),
-                new Word("magenta", "magenta"),
-                new Word("brown", "brązowy"),
-                new Word("purple", "fioletowy"),
-                new Word("white", "biały")));
+        int bg_color=getResources().getColor(R.color.category_colors);
+        ArrayList<Word> words = new ArrayList<>(Arrays.asList(new Word("red", "czerwony", bg_color, R.drawable.color_red),
+                new Word("green", "zielony", bg_color, R.drawable.color_green),
+                new Word("mustard yellow", "musztardowy", bg_color, R.drawable.color_mustard_yellow),
+                new Word("yellow", "żółty", bg_color, R.drawable.color_dusty_yellow),
+                new Word("black", "czarny", bg_color, R.drawable.color_black),
+                new Word("gray", "szary", bg_color, R.drawable.color_gray),
+                new Word("brown", "brązowy", bg_color, R.drawable.color_brown),
+                new Word("white", "biały", bg_color, R.drawable.color_white)));
 
         WordAdapter wordsArray = new WordAdapter(this, words);
         ListView listView=(ListView) findViewById(R.id.list);

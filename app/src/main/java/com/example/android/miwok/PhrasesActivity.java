@@ -29,8 +29,9 @@ public class PhrasesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
         ArrayList<Word> words= new ArrayList<>();
+        int bg_color=getResources().getColor(R.color.category_phrases);
         for(int i=0;i<10;i++){
-            words.add(new Word("phrase "+(i+1), "fraza "+(i+1)));
+            words.add(new Word("phrase "+(i+1), "fraza "+(i+1), bg_color));
         }
 
         WordAdapter wordsArray = new WordAdapter(this, words);

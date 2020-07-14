@@ -32,17 +32,17 @@ public class FamilyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
-
-        ArrayList<Word> words = new ArrayList<>(Arrays.asList(new Word("me", "ja"),
-                new Word("brother", "brat"),
-                new Word("sister", "siostra"),
-                new Word("mom", "mama"),
-                new Word("dad", "tata"),
-                new Word("wife", "żona"),
-                new Word("husband", "mąż"),
-                new Word("grandfather", "dziadek"),
-                new Word("grandmother", "babcia"),
-                new Word("cousin", "kuzyn")));
+        int bg_color=getResources().getColor(R.color.category_family);
+        ArrayList<Word> words = new ArrayList<>(Arrays.asList(new Word("daughter", "córka", bg_color, R.drawable.family_daughter),
+                new Word("father", "tata", bg_color, R.drawable.family_father),
+                new Word("grandfather", "dziadek", bg_color, R.drawable.family_grandfather),
+                new Word("grandmother", "babcia", bg_color, R.drawable.family_grandmother),
+                new Word("mother", "mama", bg_color, R.drawable.family_mother),
+                new Word("older brother", "starszy brat", bg_color, R.drawable.family_older_brother),
+                new Word("older sister", "starsza siostra", bg_color, R.drawable.family_older_sister),
+                new Word("son", "syn", bg_color, R.drawable.family_son),
+                new Word("younger brother", "młodszy brat", bg_color, R.drawable.family_younger_brother),
+                new Word("younger sister", "młodsza siostra", bg_color, R.drawable.family_younger_sister)));
 
         WordAdapter wordsArray = new WordAdapter(this, words);
         ListView listView=(ListView) findViewById(R.id.list);
