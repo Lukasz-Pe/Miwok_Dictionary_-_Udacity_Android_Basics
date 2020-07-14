@@ -17,14 +17,7 @@ package com.example.android.miwok;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import com.example.android.miwok.Word;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,19 +27,18 @@ public class NumbersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_numbers);
+        setContentView(R.layout.word_list);
 
-        ArrayList<Word> words=new ArrayList<Word>();
-        words.addAll(Arrays.asList(new Word("one","jeden"),
+        ArrayList<Word> words = new ArrayList<>(Arrays.asList(new Word("one", "jeden"),
                 new Word("two", "dwa"),
-                new Word("three","trzy"),
-                new Word("four","cztery"),
-                new Word("five","pięć"),
-                new Word("six","sześć"),
-                new Word("seven","siedem"),
-                new Word("eight","osiem"),
-                new Word("nine","dziewięć"),
-                new Word("ten","dziesięć")));
+                new Word("three", "trzy"),
+                new Word("four", "cztery"),
+                new Word("five", "pięć"),
+                new Word("six", "sześć"),
+                new Word("seven", "siedem"),
+                new Word("eight", "osiem"),
+                new Word("nine", "dziewięć"),
+                new Word("ten", "dziesięć")));
 
         WordAdapter wordsArray = new WordAdapter(this, words);
         ListView listView=(ListView) findViewById(R.id.list);
