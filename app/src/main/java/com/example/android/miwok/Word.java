@@ -2,18 +2,18 @@ package com.example.android.miwok;
 
 public class Word {
 
-    public Word(String defaultTranslation, String miwokTranslation, int background_colors){
+    public Word(String defaultTranslation, String miwokTranslation, int audioID){
         mDefaultWord = defaultTranslation;
         mMiwokWord = miwokTranslation;
         mDrawableId=0;
-        mBackgroundColor=background_colors;
+        mAudioID = audioID;
     }
 
-    public Word(String defaultTranslation, String miwokTranslation, int background_colors, int drawableId){
+    public Word(String defaultTranslation, String miwokTranslation, int drawableId, int audioID){
         mDefaultWord = defaultTranslation;
         mMiwokWord = miwokTranslation;
         mDrawableId = drawableId;
-        mBackgroundColor=background_colors;
+        mAudioID = audioID;
     }
 
     public String getDefaultTranslation(){
@@ -23,10 +23,9 @@ public class Word {
         return mMiwokWord;
     }
     public int getDrawableId(){return mDrawableId;}
-    public int getBackgroundColor(){return mBackgroundColor;}
+    public int getAudioID(){return mAudioID;}
     private String mMiwokWord;
     private String mDefaultWord;
     private int mDrawableId;
-    private int mBackgroundColor;
-
+    private int mAudioID;
 }

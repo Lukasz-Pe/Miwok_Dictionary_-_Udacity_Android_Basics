@@ -14,8 +14,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class WordAdapter extends ArrayAdapter<Word> {
-    public WordAdapter(Activity context, ArrayList<Word> words){
+    private int mBG_Color;
+    public WordAdapter(Activity context, ArrayList<Word> words, int color){
         super (context,0, words);
+        mBG_Color=color;
     }
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -24,17 +26,18 @@ public class WordAdapter extends ArrayAdapter<Word> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item,parent,false);
         }
         Word currentWord = getItem(position);
-        LinearLayout layout_color=(LinearLayout) listItemView.findViewById(R.id.word_layout_background_color);
+        LinearLayout linearLayout=(LinearLayout) listItemView.findViewById(R.id.word_layout_background_color);
         ImageView image=(ImageView)listItemView.findViewById(R.id.show_image);
         TextView miwokTextView = (TextView)listItemView.findViewById(R.id.miwok);
         TextView defaultTextView = (TextView)listItemView.findViewById(R.id.default_word);
 
-        layout_color.setBackgroundColor(currentWord.getBackgroundColor());
-        if(image.getDrawable()!=null) {
+        if(currentWord.getDrawableId()!=0) {
             image.setImageResource(currentWord.getDrawableId());
         }else{
             image.setVisibility(View.GONE);
         }
+
+        linearLayout.setBackgroundColor(mBG_Color);
         miwokTextView.setText(currentWord.getMiwokTranslation());
         defaultTextView.setText(currentWord.getDefaultTranslation());
 
