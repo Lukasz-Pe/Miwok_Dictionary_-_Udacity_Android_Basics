@@ -29,6 +29,12 @@ import java.util.List;
 
 public class PhrasesActivity extends AppCompatActivity {
     private MediaPlayer mp;
+    private MediaPlayer.OnCompletionListener mpCompletionListener= new MediaPlayer.OnCompletionListener(){
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
     ArrayList<Word> words= new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +46,6 @@ public class PhrasesActivity extends AppCompatActivity {
         R.raw.phrase_lets_go, R.raw.phrase_my_name_is,
         R.raw.phrase_where_are_you_going, R.raw.phrase_yes_im_coming,
         };
-/*        resIDs.add(R.raw.phrase_come_here);
-        resIDs.add(R.raw.phrase_what_is_your_name);
-        resIDs.add(R.raw.phrase_are_you_coming);
-        resIDs.add(R.raw.phrase_how_are_you_feeling);
-        resIDs.add(R.raw.phrase_im_coming);
-        resIDs.add(R.raw.phrase_im_feeling_good);
-        resIDs.add(R.raw.phrase_lets_go);
-        resIDs.add(R.raw.phrase_my_name_is);
-        resIDs.add(R.raw.phrase_where_are_you_going);
-        resIDs.add(R.raw.phrase_yes_im_coming);*/
         int bg_color=getResources().getColor(R.color.category_phrases);
         for(int i=0;i<10;i++){
             words.add(new Word("phrase "+(i+1), "fraza "+(i+1), resIDs[i]));
@@ -62,10 +58,23 @@ public class PhrasesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Word wrd = words.get(i);
+                releaseMediaPlayer();
                 mp= MediaPlayer.create(PhrasesActivity.this, wrd.getAudioID());
                 mp.start();
+                mp.setOnCompletionListener(mpCompletionListener);
             }
         });
         listView.setAdapter(wordsArray);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
+    void releaseMediaPlayer(){
+        if(mp!=null){
+            mp.release();
+            mp=null;
+        }
     }
 }

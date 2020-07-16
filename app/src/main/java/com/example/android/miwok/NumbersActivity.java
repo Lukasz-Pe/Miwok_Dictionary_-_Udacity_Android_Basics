@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,21 +29,27 @@ import java.util.List;
 
 public class NumbersActivity extends AppCompatActivity {
     private MediaPlayer mp;
+    private MediaPlayer.OnCompletionListener mpCompletionListener= new MediaPlayer.OnCompletionListener(){
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
         int bg_color=getResources().getColor(R.color.category_numbers);
-        final ArrayList<Word> words = new ArrayList<>(Arrays.asList(new Word("one", "jeden", R.drawable.number_one, R.raw.number_one),
-                new Word("two", "dwa", R.drawable.number_two, R.raw.number_two),
-                new Word("three", "trzy", R.drawable.number_three, R.raw.number_three),
-                new Word("four", "cztery", R.drawable.number_four, R.raw.number_four),
-                new Word("five", "pięć", R.drawable.number_five, R.raw.number_five),
-                new Word("six", "sześć", R.drawable.number_six, R.raw.number_six),
-                new Word("seven", "siedem", R.drawable.number_seven, R.raw.number_seven),
-                new Word("eight", "osiem", R.drawable.number_eight, R.raw.number_eight),
-                new Word("nine", "dziewięć", R.drawable.number_nine, R.raw.number_nine),
-                new Word("ten", "dziesięć", R.drawable.number_ten, R.raw.number_ten)));
+        final ArrayList<Word> words = new ArrayList<>(Arrays.asList(new Word("one", "jeden", R.raw.number_one, R.drawable.number_one),
+                new Word("two", "dwa", R.raw.number_two, R.drawable.number_two),
+                new Word("three", "trzy", R.raw.number_three, R.drawable.number_three),
+                new Word("four", "cztery", R.raw.number_four, R.drawable.number_four),
+                new Word("five", "pięć", R.raw.number_five, R.drawable.number_five),
+                new Word("six", "sześć", R.raw.number_six, R.drawable.number_six),
+                new Word("seven", "siedem", R.raw.number_seven, R.drawable.number_seven),
+                new Word("eight", "osiem", R.raw.number_eight, R.drawable.number_eight),
+                new Word("nine", "dziewięć", R.raw.number_nine, R.drawable.number_nine),
+                new Word("ten", "dziesięć", R.raw.number_ten, R.drawable.number_ten)));
 
 
 
@@ -53,11 +60,26 @@ public class NumbersActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Word wrd = words.get(i);
+                releaseMediaPlayer();
                 mp=MediaPlayer.create(NumbersActivity.this, wrd.getAudioID());
                 mp.start();
+                mp.setOnCompletionListener(mpCompletionListener);
             }
         });
         listView.setAdapter(wordsArray);
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
+
+    void releaseMediaPlayer(){
+        if(mp!=null){
+            mp.release();
+            mp=null;
+        }
     }
 }
