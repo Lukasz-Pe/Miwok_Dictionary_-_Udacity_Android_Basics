@@ -15,21 +15,22 @@
  */
 package com.example.android.miwok;
 
-import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
+    private int color_list[]=new int[]{R.color.category_numbers, R.color.category_family,R.color.category_colors, R.color.category_phrases};
+    private int pos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        pos=0;
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
-
+/*
         // Find the View that shows the numbers category
         TextView numbers = (TextView) findViewById(R.id.numbers);
 
@@ -92,6 +93,35 @@ public class MainActivity extends AppCompatActivity {
                 // Start the new activity
                 startActivity(phrasesIntent);
             }
+        });*/
+
+        ViewPager vp = (ViewPager) findViewById(R.id.viewpager);
+        SupportFragManager adapter = new SupportFragManager(getSupportFragmentManager(), this);
+        vp.setAdapter(adapter);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setTabTextColors(getApplicationContext().getResources().getColor(R.color.tan_background),
+                getApplicationContext().getResources().getColor(color_list[pos]));
+        tabLayout.setSelectedTabIndicatorColor(getApplicationContext().getResources().getColor(color_list[pos]));
+        tabLayout.setSelectedTabIndicatorHeight(10);
+        vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                pos=position;
+                tabLayout.setTabTextColors(getApplicationContext().getResources().getColor(R.color.tan_background),
+                        getApplicationContext().getResources().getColor(color_list[pos]));
+                tabLayout.setSelectedTabIndicatorColor(getApplicationContext().getResources().getColor(color_list[pos]));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
         });
+        tabLayout.setupWithViewPager(vp);
     }
 }
